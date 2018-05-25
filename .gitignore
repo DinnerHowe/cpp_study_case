@@ -1,0 +1,11 @@
+*.pyc
+*CMakeLists.txt.*
+*CMakeLists.txt.user
+.idea
+CMakeFiles
+build
+bin
+cmake_install.cmake
+cpp_study_case.cbp
+CMakeCache.txt
+Makefile
