@@ -40,6 +40,11 @@ include_directories(
     include
 )
 
+
+#glog
+#find_package(glog REQUIRED)
+#include_directories(BEFORE ${GLOG_INCLUDE_DIRS})
+
 #set bin file directory
 
 SET(BIN_DESTINATION ${PROJECT_SOURCE_DIR}/bin)
@@ -54,4 +59,11 @@ add_executable(test_multi_inheritance src/test_multi_inheritance.cpp)
 add_executable(test_single_inheritance src/test_single_inheritance.cpp)
 
 add_executable(test_virtual src/test_virtual.cpp)
+
+add_executable(test_vector src/test_vector.cpp)
+
+#add_executable(test_glog src/test_glog.cpp)
+
+add_executable(test_swtich src/test_swtich.cpp)
+
 
