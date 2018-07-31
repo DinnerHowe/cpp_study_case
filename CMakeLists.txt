@@ -66,4 +66,7 @@ add_executable(test_vector src/test_vector.cpp)
 
 add_executable(test_swtich src/test_swtich.cpp)
 
+add_executable(test_multi_tree src/test_multi_tree.cpp)
+
+add_executable(test_map_max_value src/test_map_max_value.cpp)
 
