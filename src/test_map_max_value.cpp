@@ -27,4 +27,15 @@ int main(int argc, char **argv)
 	++iter;
 	}
 	std::cout << "min is:   " << min_id << " : " << hash_map[min_id] << std::endl;
+
+	std::unordered_map<int, int> test_map;
+	test_map.insert({0,1});
+	test_map.insert({1,2});
+    test_map.clear();
+
+	//std::cout << test_map[-1] << std::endl;
+	//std::cout << test_map[2] << std::endl;
+	std::cout << std::boolalpha <<test_map.empty() << std::endl;
+    std::cout << test_map.count(0) << std::endl;
+	//std::cout << test_map[1] << std::endl;
 }

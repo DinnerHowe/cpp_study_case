@@ -35,6 +35,7 @@ else()
 endif (CMAKE_BUILD_TYPE MATCHES "Debug")
 
 find_package(Boost REQUIRED COMPONENTS system)
+find_package(yaml-cpp)
 
 include_directories(
     include
@@ -49,6 +50,13 @@ include_directories(
 
 SET(BIN_DESTINATION ${PROJECT_SOURCE_DIR}/bin)
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BIN_DESTINATION})
+SET(${PROJECT_NAME}_include_dirs ${YAML_CPP_INCLUDE_DIR})
+SET(${PROJECT_NAME}_lib ${YAML_CPP_LIBRARIES})
+
+include_directories(${${PROJECT_NAME}_include_dirs})
+
+
+
 
 add_executable(overload src/overload.cpp)
 
@@ -70,3 +78,11 @@ add_executable(test_multi_tree src/test_multi_tree.cpp)
 
 add_executable(test_map_max_value src/test_map_max_value.cpp)
 
+add_executable(test_yaml src/test_yaml.cpp)
+
+add_executable(test_log src/test_log.cpp src/log.cpp)
+
+add_executable(test_time_t src/test_time_t.cpp)
+
+
+target_link_libraries(test_yaml ${${PROJECT_NAME}_lib})
