@@ -1,12 +1,3 @@
-/*********************************************************************
- * @file: planning_change_lane_analyse.cpp
- * @copyright (C) Alibaba-inc - All Rights Reserved
- * Unauthorized copying of this file, via any medium is strictly prohibited
- * @date: 27/08/2018
- * @author: howe <zhihao.xzh@alibaba-inc.com>
- * @details: This node is used for record log file
- * @version 2.6
-*********************************************************************/
 #include "log.h"
 
 Log::Log()
