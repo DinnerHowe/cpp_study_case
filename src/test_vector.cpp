@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <vector>
 #include <map>
+#include <time.h>
 
 using namespace std;
 
@@ -15,12 +16,12 @@ int main(int argc, char **argv)
     // a.emplace_back(4);
 
 	//*****************reverse
-    //for (auto i : a){
-        //std::cout<< i << std::endl;
-    //}
-    //a.reserve(a.size());
-    //reverse(a.begin(), a.end());
-    //std::cout<< "\n" << std::endl;
+    // for (auto i : a){
+    //     std::cout<< i << std::endl;
+    // }
+    // // a.reserve(a.size());
+    // std::reverse(a.begin(), a.end());
+    // std::cout<< "\n" << std::endl;
 
     // std::vector<int> b;
     // b.emplace_back(5);
@@ -153,18 +154,68 @@ int main(int argc, char **argv)
     //     }
     //     std::cout << "" << std::endl;
     // }
-    using namespace std;
-    vector<int> L;
-    L.push_back( 1 );
-    L.push_back( 2 );
-    L.push_back( 3 );
-    L.push_back( 4 );
-    L.push_back( 5 );
-    vector<int>::iterator result = find( L.begin( ), L.end( ), 5 ); //查找3
-    if ( result == L.end( ) ) //没找到        
-    cout << "No" << endl;
-    else //找到        
-    cout << "Yes" << endl;
+    // using namespace std;
+    // vector<int> L;
+    // L.push_back( 1 );
+    // L.push_back( 2 );
+    // L.push_back( 3 );
+    // L.push_back( 4 );
+    // L.push_back( 5 );
+    // vector<int>::iterator result = find( L.begin( ), L.end( ), 5 ); //查找3
+    // if ( result == L.end( ) ) //没找到        
+    // cout << "No" << endl;
+    // else //找到        
+    // cout << "Yes" << endl;
+    // vector<int> map;
+    // map.assign(L.begin(), L.end());
+    // std::cout << map.back() << std::endl;
+    // map.pop_back();
+    // std::cout << map.back() << std::endl;
+    // std::cout << "=============" << std::endl;
+
+    // for (auto i : map) {
+    //   std::cout << i << std::endl;
+    // }
+
+    //******************首位插入另一个iterta vs i++
+    std::vector<int> b;
+    for (int i = 0; i < 1e7; i++) {
+      b.emplace_back(i);
+    }
+    clock_t time_iter = clock();
+    for (std::vector<int>::iterator i = b.begin(); i != b.end(); ++i) {
+      continue;
+    }
+    std::cout << "iterator cost time: " << (clock() - time_iter) * 1000.0 / CLOCKS_PER_SEC<< " ms\n";
+
+    clock_t time_plusplus = clock();
+    for (size_t i = 0; i < b.size(); ++i) {
+      continue;
+    }
+    std::cout << "++i cost time: " << (clock() - time_plusplus) * 1000.0 / CLOCKS_PER_SEC<< " ms\n";
+
+    clock_t time_iter2 = clock();
+    for (std::vector<int>::iterator i = b.begin(); i != b.end(); i++) {
+      continue;
+    }
+    std::cout << "iterator2 cost time: " << (clock() - time_iter2) * 1000.0 / CLOCKS_PER_SEC<< " ms\n";
+
+    clock_t time_iter3 = clock();
+    for (auto i = b.begin(); i != b.end(); i++) {
+      continue;
+    }
+    std::cout << "iterator3 cost time: " << (clock() - time_iter3) * 1000.0 / CLOCKS_PER_SEC<< " ms\n";
+
+    clock_t time_plusplus2 = clock();
+    for (size_t i = 0; i < b.size(); i++) {
+      continue;
+    }
+    std::cout << "++i2 cost time: " << (clock() - time_plusplus2) * 1000.0 / CLOCKS_PER_SEC<< " ms\n";
+
+    clock_t time_iter4 = clock();
+    auto i = b.begin();
+    while(i != b.end()) {i++; continue;}
+    std::cout << "iterator4 cost time: " << (clock() - time_iter4) * 1000.0 / CLOCKS_PER_SEC<< " ms\n";
 
     return 0;
 }
