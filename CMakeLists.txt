@@ -84,5 +84,6 @@ add_executable(test_log src/test_log.cpp src/log.cpp)
 
 add_executable(test_time_t src/test_time_t.cpp)
 
+add_executable(test_bitree src/test_bitree.cpp)
 
 target_link_libraries(test_yaml ${${PROJECT_NAME}_lib})
