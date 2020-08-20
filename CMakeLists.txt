@@ -45,6 +45,7 @@ include_directories(
 #glog
 #find_package(glog REQUIRED)
 #include_directories(BEFORE ${GLOG_INCLUDE_DIRS})
+find_package (Eigen3 3.3 REQUIRED NO_MODULE)
 
 #set bin file directory
 
@@ -56,7 +57,8 @@ SET(${PROJECT_NAME}_lib ${YAML_CPP_LIBRARIES})
 include_directories(${${PROJECT_NAME}_include_dirs})
 
 
-
+add_executable(test_eigen src/test_eigen.cpp)
+target_link_libraries (test_eigen Eigen3::Eigen)
 
 add_executable(overload src/overload.cpp)
 

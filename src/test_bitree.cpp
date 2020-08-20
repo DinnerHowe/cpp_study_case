@@ -12,6 +12,8 @@ struct Dirct {
 
 struct TreeNode {
   int val;
+  double x;
+  double y;
   std::shared_ptr<TreeNode> left;
   std::shared_ptr<TreeNode> right;
   std::shared_ptr<TreeNode> middle;
@@ -19,33 +21,41 @@ struct TreeNode {
 };
 
 // time cost: 0.076
+// result:
+// 0->1->0->1->2
+// 0->1->0->2->0->1
+// 0->2->0->0->1
+// 0->0->0->1->2
+
+
 class BiTree {
  public:
   BiTree() = default;
   ~BiTree() = default;
 
  public:
-  inline std::vector<std::string> BinaryTreePaths(std::shared_ptr<TreeNode> root) {
-    std::vector<std::string> res;
+  inline std::vector<std::vector<int>> BinaryTreePaths(std::shared_ptr<TreeNode> root) {
+    std::vector<std::vector<int>> res;
     if (root == nullptr) { return res; }
-    BinaryTreePaths(root, res, "");
+    std::vector<int> path;
+    BinaryTreePaths(root, &res, path);
     return res;
   }
 
   inline void BinaryTreePaths(std::shared_ptr<TreeNode> root,
-                              std::vector<std::string>& res,
-                              std::string path) {
-    path += std::to_string(root->val);
+                              std::vector<std::vector<int>>* res,
+                              std::vector<int> path) {
+    path.emplace_back(root->val);
     if (root->left == nullptr &&
         root->right == nullptr &&
         root->middle == nullptr) {
-      res.push_back(path);
+      res->emplace_back(path);
       return;
     }
 
-    if (root->left) { BinaryTreePaths(root->left, res, path + "->"); }
-    if (root->right) { BinaryTreePaths(root->right, res, path + "->"); }
-    if (root->middle) { BinaryTreePaths(root->middle, res, path + "->"); }
+    if (root->left) { BinaryTreePaths(root->left, res, path); }
+    if (root->right) { BinaryTreePaths(root->right, res, path); }
+    if (root->middle) { BinaryTreePaths(root->middle, res, path); }
   }
 };
 
@@ -84,14 +94,25 @@ int main() {
   mid34->left = left44;
   mid42->left = left5;
 
-  clock_t time_start = clock();
-  std::shared_ptr<BiTree> bi_tree(new BiTree());
-  auto result = bi_tree->BinaryTreePaths(root);
-  std::cout << "BinaryTreePaths: " << (clock() - time_start) * 1000.0 /  CLOCKS_PER_SEC << std::endl;
+  int count = 0;
+  while (count < 1e100000) {
+    clock_t time_start = clock();
+    std::shared_ptr<BiTree> bi_tree(new BiTree());
+    auto result = bi_tree->BinaryTreePaths(root);
+    std::cout << "BinaryTreePaths: " << (clock() - time_start) * 1000.0 /  CLOCKS_PER_SEC << std::endl;
 
-  for (auto i : result) {
-    std::cout << i << std::endl;
+    // for (auto i : result) {
+    //   std::cout << i << std::endl;
+    // }
+    for (auto i : result) {
+      for (auto j : i) {
+        std::cout << j << "->";
+      }
+      std::cout << std::endl;
+    }
+    count++;
   }
+
   return 0;
 }
 

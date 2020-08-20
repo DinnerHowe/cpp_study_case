@@ -23,20 +23,24 @@ int main(int argc, char **argv)
     // std::reverse(a.begin(), a.end());
     // std::cout<< "\n" << std::endl;
 
-    // std::vector<int> b;
-    // b.emplace_back(5);
-    // b.emplace_back(6);
-    // b.emplace_back(7);
-    // b.emplace_back(8);
+    std::vector<int> b;
+    b.emplace_back(5);
+    b.emplace_back(6);
+    b.emplace_back(7);
+    b.emplace_back(8);
     
 	//*****************insert
-    // std::vector<int> c;
-    // c.insert(c.end(), b.begin(), b.end());
+    std::vector<int> c;
+    c.insert(c.end(), b.begin(), b.end());
     // c.insert(c.end(), a.begin(), a.end());
     // a=c;
-    // for (auto i : a){
-    //     std::cout<< i << std::endl;
-    // }
+    b.clear();
+    for (auto i : c){
+        std::cout<< i << std::endl;
+    }
+    for (auto i : b){
+        std::cout << "rt" << i << std::endl;
+    }
 
 	//******************iterator
     // std::cout<< "\niterator" << std::endl;
@@ -177,45 +181,64 @@ int main(int argc, char **argv)
     //   std::cout << i << std::endl;
     // }
 
-    //******************首位插入另一个iterta vs i++
-    std::vector<int> b;
-    for (int i = 0; i < 1e7; i++) {
-      b.emplace_back(i);
-    }
-    clock_t time_iter = clock();
-    for (std::vector<int>::iterator i = b.begin(); i != b.end(); ++i) {
-      continue;
-    }
-    std::cout << "iterator cost time: " << (clock() - time_iter) * 1000.0 / CLOCKS_PER_SEC<< " ms\n";
+    // //******************首位插入另一个iterta vs i++
+    // std::vector<int> b;
+    // for (int i = 0; i < 1e7; i++) {
+    //   b.emplace_back(i);
+    // }
+    // clock_t time_iter = clock();
+    // for (std::vector<int>::iterator i = b.begin(); i != b.end(); ++i) {
+    //   continue;
+    // }
+    // std::cout << "iterator cost time: " << (clock() - time_iter) * 1000.0 / CLOCKS_PER_SEC<< " ms\n";
 
-    clock_t time_plusplus = clock();
-    for (size_t i = 0; i < b.size(); ++i) {
-      continue;
-    }
-    std::cout << "++i cost time: " << (clock() - time_plusplus) * 1000.0 / CLOCKS_PER_SEC<< " ms\n";
+    // clock_t time_plusplus = clock();
+    // for (size_t i = 0; i < b.size(); ++i) {
+    //   continue;
+    // }
+    // std::cout << "++i cost time: " << (clock() - time_plusplus) * 1000.0 / CLOCKS_PER_SEC<< " ms\n";
 
-    clock_t time_iter2 = clock();
-    for (std::vector<int>::iterator i = b.begin(); i != b.end(); i++) {
-      continue;
-    }
-    std::cout << "iterator2 cost time: " << (clock() - time_iter2) * 1000.0 / CLOCKS_PER_SEC<< " ms\n";
+    // clock_t time_iter2 = clock();
+    // for (std::vector<int>::iterator i = b.begin(); i != b.end(); i++) {
+    //   continue;
+    // }
+    // std::cout << "iterator2 cost time: " << (clock() - time_iter2) * 1000.0 / CLOCKS_PER_SEC<< " ms\n";
 
-    clock_t time_iter3 = clock();
-    for (auto i = b.begin(); i != b.end(); i++) {
-      continue;
-    }
-    std::cout << "iterator3 cost time: " << (clock() - time_iter3) * 1000.0 / CLOCKS_PER_SEC<< " ms\n";
+    // clock_t time_iter3 = clock();
+    // for (auto i = b.begin(); i != b.end(); i++) {
+    //   continue;
+    // }
+    // std::cout << "iterator3 cost time: " << (clock() - time_iter3) * 1000.0 / CLOCKS_PER_SEC<< " ms\n";
 
-    clock_t time_plusplus2 = clock();
-    for (size_t i = 0; i < b.size(); i++) {
-      continue;
-    }
-    std::cout << "++i2 cost time: " << (clock() - time_plusplus2) * 1000.0 / CLOCKS_PER_SEC<< " ms\n";
+    // clock_t time_plusplus2 = clock();
+    // for (size_t i = 0; i < b.size(); i++) {
+    //   continue;
+    // }
+    // std::cout << "++i2 cost time: " << (clock() - time_plusplus2) * 1000.0 / CLOCKS_PER_SEC<< " ms\n";
 
-    clock_t time_iter4 = clock();
-    auto i = b.begin();
-    while(i != b.end()) {i++; continue;}
-    std::cout << "iterator4 cost time: " << (clock() - time_iter4) * 1000.0 / CLOCKS_PER_SEC<< " ms\n";
+    // clock_t time_iter4 = clock();
+    // auto i = b.begin();
+    // while(i != b.end()) {i++; continue;}
+    // std::cout << "iterator4 cost time: " << (clock() - time_iter4) * 1000.0 / CLOCKS_PER_SEC<< " ms\n";
 
+    // reserve clear resize
+
+    // std::vector<bool> test1;
+    // test1.resize(10000, true);
+    // for (size_t i = 0; i < test1.size(); i++) {
+    //   std::cout << "\ntest1: " << test1.at(i);
+    // }
+    // std::cout << std::endl;
+    // std::cout << test1.size() << " ," << test1.capacity() << std::endl;
+    // std::cout << "\n clear" << std::endl;
+    // test1.clear();
+    // for (size_t i = 0; i < test1.size(); i++) {
+    //   std::cout << "\n clear test1: " << test1.at(i);
+    // }
+    // std::cout << std::endl;
+    // std::cout << test1.size() << " ," << test1.capacity() << std::endl;
+    // test1.resize(5, true);
+    // test1.shrink_to_fit();
+    // std::cout << test1.size() << " ," << test1.capacity() << std::endl;
     return 0;
 }
