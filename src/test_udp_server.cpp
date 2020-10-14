@@ -6,9 +6,11 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <iostream>
+#include <arpa/inet.h>
 
-#define SERVER_PORT 5001
+#define SERVER_PORT 5000
 #define BUFF_LEN 1024
+#define SERVER_IP "30.225.216.188"
 
 void handle_udp_msg(int fd)
 {
@@ -29,6 +31,7 @@ void handle_udp_msg(int fd)
         printf("client:%s\n",buf);  //打印client发过来的信息
         memset(buf, 0, BUFF_LEN);
         sprintf(buf, "I have recieved %d bytes data!\n", count);  //回复client
+        std::cout << "receive from :" << (clent_addr.sin_addr.s_addr) << ": " <<  (clent_addr.sin_port) << std::endl;
         printf("server:%s\n",buf);  //打印自己发送的信息给
         sendto(fd, buf, BUFF_LEN, 0, (struct sockaddr*)&clent_addr, len);  //发送信息给client，注意使用了clent_addr结构体指针
 
@@ -54,15 +57,15 @@ int main(int argc, char* argv[])
         return -1;
     }
 
-    std::cout << "server_fd: "<< server_fd << std::endl;
-
     memset(&ser_addr, 0, sizeof(ser_addr));
     ser_addr.sin_family = AF_INET;
-    ser_addr.sin_addr.s_addr = htonl(INADDR_ANY); //IP地址，需要进行网络序转换，INADDR_ANY：本地地址
+    ser_addr.sin_addr.s_addr = inet_addr(SERVER_IP); //IP地址，需要进行网络序转换，INADDR_ANY：本地地址
     ser_addr.sin_port = htons(SERVER_PORT);  //端口号，需要网络序转换
 
     ret = bind(server_fd, (struct sockaddr*)&ser_addr, sizeof(ser_addr));
-    std::cout << "ret: "<< ret << ", ser_addr:" << ser_addr.sin_port << ",sin_addr: " << ser_addr.sin_addr.s_addr << ",INADDR_ANY: " << INADDR_ANY << ",SERVER_PORT: " << SERVER_PORT << std::endl;
+    std::cout << "bind ret: "<< ret
+              << ", ser_addr:" << ser_addr.sin_addr.s_addr << ": " << ser_addr.sin_port
+              << ",INADDR_ANY: " << INADDR_ANY << ",SERVER_PORT: " << SERVER_PORT << std::endl;
     if(ret < 0)
     {
         printf("socket bind fail!\n");
