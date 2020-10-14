@@ -5,6 +5,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <arpa/inet.h>
+#include <iostream>
 
 #define SERVER_PORT 5000
 #define BUFF_LEN 512
@@ -16,16 +17,19 @@ void udp_msg_sender(int fd, struct sockaddr* dst)
 
     socklen_t len;
     struct sockaddr_in src;
+    int count_num;
     while(1)
     {
-        char buf[BUFF_LEN] = "TEST UDP MSG!\n";
+        std::string data_s = "TEST UDP MSG! " + std::to_string(count_num);
+        char buf[BUFF_LEN];
+        strcpy(buf, data_s.c_str());
         len = sizeof(*dst);
         printf("client:%s\n",buf);  //打印自己发送的信息
         sendto(fd, buf, BUFF_LEN, 0, dst, len);
         memset(buf, 0, BUFF_LEN);
         recvfrom(fd, buf, BUFF_LEN, 0, (struct sockaddr*)&src, &len);  //接收来自server的信息
         printf("server:%s\n",buf);
-
+        count_num++;
     }
 }
 
