@@ -31,7 +31,7 @@ void handle_udp_msg(int fd)
         printf("client:%s\n",buf);  //打印client发过来的信息
         memset(buf, 0, BUFF_LEN);
         sprintf(buf, "I have recieved %d bytes data!\n", count);  //回复client
-        std::cout << "receive from :" << (clent_addr.sin_addr.s_addr) << ": " <<  (clent_addr.sin_port) << std::endl;
+        std::cout << "receive from :" << inet_ntoa(clent_addr.sin_addr) << ": " <<  ntohs(clent_addr.sin_port) << std::endl;
         printf("server:%s\n",buf);  //打印自己发送的信息给
         sendto(fd, buf, BUFF_LEN, 0, (struct sockaddr*)&clent_addr, len);  //发送信息给client，注意使用了clent_addr结构体指针
 
@@ -64,7 +64,7 @@ int main(int argc, char* argv[])
 
     ret = bind(server_fd, (struct sockaddr*)&ser_addr, sizeof(ser_addr));
     std::cout << "bind ret: "<< ret
-              << ", ser_addr:" << ser_addr.sin_addr.s_addr << ": " << ser_addr.sin_port
+              << ", ser_addr:" << inet_ntoa(ser_addr.sin_addr) << ": " << ntohs(ser_addr.sin_port)
               << ",INADDR_ANY: " << INADDR_ANY << ",SERVER_PORT: " << SERVER_PORT << std::endl;
     if(ret < 0)
     {
