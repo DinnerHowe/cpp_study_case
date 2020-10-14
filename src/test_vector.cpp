@@ -3,9 +3,18 @@
 #include <vector>
 #include <map>
 #include <time.h>
+#include <chrono>
 
 using namespace std;
-
+inline double GetTimestamp() {
+  auto timestamp = std::chrono::steady_clock::now();
+  auto timestamp_since_epoch = timestamp.time_since_epoch();
+  auto duration_microseconds =
+      std::chrono::duration_cast<std::chrono::microseconds>(
+          timestamp_since_epoch);
+  auto duration_ms = static_cast<double>(duration_microseconds.count()) / 1000;
+  return duration_ms;
+}
 
 int main(int argc, char **argv)
 {
@@ -23,37 +32,37 @@ int main(int argc, char **argv)
     // std::reverse(a.begin(), a.end());
     // std::cout<< "\n" << std::endl;
 
-    std::vector<int> b;
-    b.emplace_back(5);
-    b.emplace_back(6);
-    b.emplace_back(7);
-    b.emplace_back(8);
-    
-	//*****************insert
-    std::vector<int> c;
-    c.insert(c.end(), b.begin(), b.end());
-    // c.insert(c.end(), a.begin(), a.end());
-    // a=c;
-    b.clear();
-    for (auto i : c){
-        std::cout<< i << std::endl;
-    }
-    for (auto i : b){
-        std::cout << "rt" << i << std::endl;
-    }
+  //   std::vector<int> b;
+  //   b.emplace_back(5);
+  //   b.emplace_back(6);
+  //   b.emplace_back(7);
+  //   b.emplace_back(8);
+
+	// //*****************insert
+  //   std::vector<int> c;
+  //   c.insert(c.end(), b.begin(), b.end());
+  //   // c.insert(c.end(), a.begin(), a.end());
+  //   // a=c;
+  //   b.clear();
+  //   for (auto i : c){
+  //       std::cout<< i << std::endl;
+  //   }
+  //   for (auto i : b){
+  //       std::cout << "rt" << i << std::endl;
+  //   }
 
 	//******************iterator
     // std::cout<< "\niterator" << std::endl;
-    // for(vector<int>::iterator iter = a.begin(); iter != a.end(); iter++) 
+    // for(vector<int>::iterator iter = a.begin(); iter != a.end(); iter++)
 	// {
     //     std::cout<< "a: " << *iter << std::endl;
-	// } 
+	// }
 
     // std::cout<< "\n" << std::endl;
-    // for(vector<int>::reverse_iterator iter = a.rbegin(); iter != a.rend(); iter++) 
+    // for(vector<int>::reverse_iterator iter = a.rbegin(); iter != a.rend(); iter++)
 	// {
     //     std::cout<< "a reverse: "<< *iter << std::endl;
-	// } 
+	// }
 
 	//******************判断末尾同元素个数
     // std::vector<int> d;
@@ -107,7 +116,7 @@ int main(int argc, char **argv)
     // 	std::cout<< "1 there is "<< i.first <<" item is same at " << i.second << std::endl;
 	// }
 
-	//******************erease 
+	//******************erase
     // if (!a.empty())
     // {
     //     auto a_temp = a;
@@ -166,9 +175,9 @@ int main(int argc, char **argv)
     // L.push_back( 4 );
     // L.push_back( 5 );
     // vector<int>::iterator result = find( L.begin( ), L.end( ), 5 ); //查找3
-    // if ( result == L.end( ) ) //没找到        
+    // if ( result == L.end( ) ) //没找到
     // cout << "No" << endl;
-    // else //找到        
+    // else //找到
     // cout << "Yes" << endl;
     // vector<int> map;
     // map.assign(L.begin(), L.end());
@@ -240,5 +249,112 @@ int main(int argc, char **argv)
     // test1.resize(5, true);
     // test1.shrink_to_fit();
     // std::cout << test1.size() << " ," << test1.capacity() << std::endl;
+    // std::vector<int> a = {1};
+    // std::vector<int> b = {1,1,1,1,1,1,1,1,1,1,1,1};
+    // std::vector<int> c = {1,0,1,0,1,0,1,0,1,0,1,0};
+    // std::cout << "a: " << std::endl;
+    // auto last_a = a[0];
+    // for (size_t i = 0; i < a.size(); i++) {
+    //   last_a += a[i];
+    //   std::cout << "mean: " << last_a / i;
+    //   std::cout << "mean: " << last_a / i;
+    // }
+    // std::cout << "capcitt: " << a.capacity() << ", size: " << a.size() << std::endl;
+    // for (size_t i = 0; i < b.size(); i++) {
+    //   a.emplace_back(5);
+    //   std::cout << "capcitt: " << a.capacity() << ", size: " << a.size() << std::endl;
+    // }
+
+    // // //****************** swap
+    // std::vector<int> a = {1};
+    // std::vector<int> a_test = {1};
+    // std::vector<int> b = {1,1,1,1,1,1,1,1,1,1,1,1};
+    // std::vector<int> c = {1,0,1,0,1,0,1,0,1,0,1,0};
+    // std::cout << "a: ";
+    // for (std::vector<int>::iterator i = a.begin(); i !=a.end(); ++i) {
+    //   std::cout << ", " << *i;
+    // }
+    // std::cout << std::endl;
+    // std::cout << "b: ";
+    // for (std::vector<int>::iterator i = b.begin(); i !=b.end(); ++i) {
+    //   std::cout << ", " << *i;
+    // }
+    // std::cout << std::endl;
+    // std::cout << "c: ";
+    // for (std::vector<int>::iterator i = c.begin(); i !=c.end(); ++i) {
+    //   std::cout << ", " << *i;
+    // }
+    // std::cout << std::endl;
+
+    // std::vector<int> b_test;
+    // b_test.resize(1000000000, 1);
+
+    // double start = GetTimestamp();
+    // a.swap(b_test);
+    // std::cout << "swap time cost: " << (GetTimestamp() - start )<< std::endl;
+
+    // double start_1 = GetTimestamp();
+    // a_test = b_test;
+    // std::cout << "= time cost: " << (GetTimestamp() - start_1) << std::endl;
+
+    // std::cout << "swap b" << std::endl;
+    // std::cout << "a: ";
+    // for (std::vector<int>::iterator i = a.begin(); i !=a.end(); ++i) {
+    //   std::cout << ", " << *i;
+    // }
+    // std::cout << std::endl;
+    // std::cout << "b: ";
+    // for (std::vector<int>::iterator i = b.begin(); i !=b.end(); ++i) {
+    //   std::cout << ", " << *i;
+    // }
+    // std::cout << std::endl;
+    // std::cout << "c: ";
+    // for (std::vector<int>::iterator i = c.begin(); i !=c.end(); ++i) {
+    //   std::cout << ", " << *i;
+    // }
+    // std::cout << std::endl;
+
+    // a.swap(c);
+    // std::cout << "swap c" << std::endl;
+    // std::cout << "a: ";
+    // for (std::vector<int>::iterator i = a.begin(); i !=a.end(); ++i) {
+    //   std::cout << ", " << *i;
+    // }
+    // std::cout << std::endl;
+    // std::cout << "b: ";
+    // for (std::vector<int>::iterator i = b.begin(); i !=b.end(); ++i) {
+    //   std::cout << ", " << *i;
+    // }
+    // std::cout << std::endl;
+    // std::cout << "c: ";
+    // for (std::vector<int>::iterator i = c.begin(); i !=c.end(); ++i) {
+    //   std::cout << ", " << *i;
+    // }
+    // std::cout << std::endl;
+
+    // // //****************** reserve
+    // std::vector<int> b = {1,0,0,1,1,0,0,0,0,1,0,1};
+    // for (std::vector<int>::iterator i = b.begin(); i !=b.end(); ++i) {
+    //   std::cout << ", " << *i;
+    // }
+    // std::cout << std::endl;
+    // std::cout << "capa: " << b.capacity() << std::endl;
+    // b.reserve((b.size() + 1));
+    // int open_size = 0;
+    // for (std::vector<int>::iterator i = b.begin(); i !=b.end(); ++i) {
+    //   std::cout << " " << *i;
+    //   if (*i != 1) {open_size += 1;}
+    //   else {open_size = 0;}
+    //   std::cout << " open_size: " << open_size << std::endl;
+    // }
+    // std::cout << std::endl;
+    // std::cout << "capa: " << b.capacity() << std::endl;
+
+    //****************** max_element min_element
+    std::vector<int> a = {0,1,2,3,4,5,6,7,0,7,2,3,1};
+    std::cout << "max_element: " << *std::max_element(a.begin() + 1, a.begin() + 1) << std::endl;
+    std::cout << "max_element: " << *std::max_element(a.begin() + 2, a.begin() + 5) << std::endl;
+    std::cout << "min_element: " << *std::min_element(a.begin() + 1, a.begin() + 1) << std::endl;
+    std::cout << "min_element: " << *std::min_element(a.begin() + 2, a.begin() + 5) << std::endl;
     return 0;
 }
