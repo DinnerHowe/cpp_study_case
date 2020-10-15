@@ -20,7 +20,7 @@ void udp_msg_sender(int fd, struct sockaddr* dst)
     int count_num;
     while(1)
     {
-        std::string data_s = "TEST UDP MSG! " + std::to_string(count_num);
+        std::string data_s = "M2 TEST UDP MSG! " + std::to_string(count_num);
         char buf[BUFF_LEN];
         strcpy(buf, data_s.c_str());
         len = sizeof(*dst);

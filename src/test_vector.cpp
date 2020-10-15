@@ -116,7 +116,14 @@ int main(int argc, char **argv)
     // 	std::cout<< "1 there is "<< i.first <<" item is same at " << i.second << std::endl;
 	// }
 
-	//******************erase
+	// ******************erase
+  std::vector<int> a = {1,2,3,4};
+  // std::vector<int> a = {};
+  a.erase(a.begin() + 0, a.end());
+	for (auto i = a.begin(); i != a.end(); i++) {
+    std::cout<< "a: "<< *i << std::endl;
+	}
+
     // if (!a.empty())
     // {
     //     auto a_temp = a;
@@ -350,11 +357,11 @@ int main(int argc, char **argv)
     // std::cout << std::endl;
     // std::cout << "capa: " << b.capacity() << std::endl;
 
-    //****************** max_element min_element
-    std::vector<int> a = {0,1,2,3,4,5,6,7,0,7,2,3,1};
-    std::cout << "max_element: " << *std::max_element(a.begin() + 1, a.begin() + 1) << std::endl;
-    std::cout << "max_element: " << *std::max_element(a.begin() + 2, a.begin() + 5) << std::endl;
-    std::cout << "min_element: " << *std::min_element(a.begin() + 1, a.begin() + 1) << std::endl;
-    std::cout << "min_element: " << *std::min_element(a.begin() + 2, a.begin() + 5) << std::endl;
+    // //****************** max_element min_element
+    // std::vector<int> a = {0,1,2,3,4,5,6,7,0,7,2,3,1};
+    // std::cout << "max_element: " << *std::max_element(a.begin() + 1, a.begin() + 1) << std::endl;
+    // std::cout << "max_element: " << *std::max_element(a.begin() + 2, a.begin() + 5) << std::endl;
+    // std::cout << "min_element: " << *std::min_element(a.begin() + 1, a.begin() + 1) << std::endl;
+    // std::cout << "min_element: " << *std::min_element(a.begin() + 2, a.begin() + 5) << std::endl;
     return 0;
 }
