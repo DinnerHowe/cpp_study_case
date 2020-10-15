@@ -54,7 +54,8 @@ SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BIN_DESTINATION})
 SET(${PROJECT_NAME}_include_dirs ${YAML_CPP_INCLUDE_DIR})
 SET(${PROJECT_NAME}_lib ${YAML_CPP_LIBRARIES})
 
-include_directories(${${PROJECT_NAME}_include_dirs})
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
 
 
 add_executable(test_eigen src/test_eigen.cpp)
@@ -90,5 +91,11 @@ add_executable(test_bitree src/test_bitree.cpp)
 
 add_executable(test_udp_server src/test_udp_server.cpp)
 add_executable(test_udp_client src/test_udp_client.cpp)
+target_link_libraries(test_udp_server ${CMAKE_THREAD_LIBS_INIT})
+
+add_executable(threadpool src/threadpool.cpp)
+target_link_libraries(threadpool ${CMAKE_THREAD_LIBS_INIT})
+add_executable(test_threadpool src/test_threadpool.cpp)
+target_link_libraries(test_threadpool ${CMAKE_THREAD_LIBS_INIT})
 
 target_link_libraries(test_yaml ${${PROJECT_NAME}_lib})
