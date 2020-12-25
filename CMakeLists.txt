@@ -89,6 +89,9 @@ add_executable(test_time_t src/test_time_t.cpp)
 
 add_executable(test_bitree src/test_bitree.cpp)
 
+add_executable(test_thread src/test_thread.cpp)
+target_link_libraries(test_thread ${CMAKE_THREAD_LIBS_INIT})
+
 add_executable(test_udp_server src/test_udp_server.cpp)
 add_executable(test_udp_client src/test_udp_client.cpp)
 target_link_libraries(test_udp_server ${CMAKE_THREAD_LIBS_INIT})
