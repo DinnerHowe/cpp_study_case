@@ -393,61 +393,120 @@ int main(int argc, char **argv)
 
   // a.erase(a.begin() + 0, a.end());
   // std::cout << a.size() << std::endl;
-  std::vector<bool> l_1d_map_ = {
-      true,
-      false,
-      false,
-      true,
-      true,
-      false,
-      false,
-      false, true, true};
-  int open_size = 0;
-  int narrow_trigger_size = 1;
-  double grid_resolusion_ = 1;
-  double l_map_start_ = 0;
-  double closest_gap_l_ = std::numeric_limits<double>::max();
-  size_t ego_detect_start = 0;
-  size_t ego_detect_end = l_1d_map_.size();
-  double ego_center_l_ = 7.0;
+  // std::vector<bool> l_1d_map_ = {
+  //     true,
+  //     false,
+  //     false,
+  //     true,
+  //     true,
+  //     false,
+  //     false,
+  //     false, true, true};
+  // int open_size = 0;
+  // int narrow_trigger_size = 1;
+  // double grid_resolusion_ = 1;
+  // double l_map_start_ = 0;
+  // double closest_gap_l_ = std::numeric_limits<double>::max();
+  // size_t ego_detect_start = 0;
+  // size_t ego_detect_end = l_1d_map_.size();
+  // double ego_center_l_ = 7.0;
 
-  closest_gap_l_ = std::numeric_limits<double>::max();
-  double gap_start_l = std::numeric_limits<double>::max(), gap_end_l = std::numeric_limits<double>::max();
-  for (size_t i = 0; i < l_1d_map_.size(); i++)
+  // closest_gap_l_ = std::numeric_limits<double>::max();
+  // double gap_start_l = std::numeric_limits<double>::max(), gap_end_l = std::numeric_limits<double>::max();
+  // for (size_t i = 0; i < l_1d_map_.size(); i++)
+  // {
+  //   if (l_1d_map_[i] == false)
+  //   {
+  //     if (open_size == 0)
+  //     {
+  //       gap_start_l = i * grid_resolusion_ + l_map_start_;
+  //     }
+  //     open_size++;
+  //   }
+  //   else
+  //   {
+  //     if (open_size != 0)
+  //     {
+  //       gap_end_l = (i - 1) * grid_resolusion_ + l_map_start_;
+  //     }
+  //     if (open_size > narrow_trigger_size)
+  //     {
+  //       if (i >= ego_detect_start && i < ego_detect_end)
+  //       {
+  //         if (std::min(std::fabs(gap_start_l - ego_center_l_),
+  //                      std::fabs(gap_end_l - ego_center_l_)) <
+  //             std::fabs(closest_gap_l_ - ego_center_l_))
+  //         {
+  //           closest_gap_l_ =
+  //               (std::fabs(gap_start_l - ego_center_l_) < std::fabs(gap_end_l - ego_center_l_))
+  //                   ? gap_start_l
+  //                   : gap_end_l;
+  //         }
+  //       }
+  //     }
+  //     open_size = 0;
+  //   }
+  // }
+  // std::cout << "closest_gap_l_: " << closest_gap_l_ << std::endl;
+  // std::vector<int> a = {0, 1, 2, 3, 4, 5, 6, 7, 0, 7, 2, 3, 1};
+  // std::vector<int> b = a;
+  // // a
+  // for (std::vector<int>::iterator i = a.begin(); i != a.end(); ++i)
+  // {
+  //   std::cout << " " << *i;
+  // }
+  // std::cout << " end" << std::endl;
+
+  // auto iter_checker_a = a.begin();
+  // for (auto i : a)
+  // {
+  //   if (i == 4)
+  //   {
+  //     break;
+  //   }
+  //   ++iter_checker_a;
+  // }
+  // std::cout << "erase: " << *iter_checker_a << " to " << a.back() << std::endl;
+  // a.erase(iter_checker_a, a.begin() + a.size());
+
+  // for (std::vector<int>::iterator i = a.begin(); i != a.end(); ++i)
+  // {
+  //   std::cout << " " << *i;
+  // }
+  // std::cout << " end" << std::endl;
+
+  // // b
+  // for (std::vector<int>::iterator i = b.begin(); i != b.end(); ++i)
+  // {
+  //   std::cout << " " << *i;
+  // }
+  // std::cout << " end" << std::endl;
+
+  // auto iter_checker_b = b.begin();
+  // for (auto i : b)
+  // {
+  //   if (i == 4)
+  //   {
+  //     break;
+  //   }
+  //   iter_checker_b++;
+  // }
+  // std::cout << "erase: " << *iter_checker_b << " to " << b.back() << std::endl;
+  // b.erase(b.begin(), iter_checker_b);
+
+  // for (std::vector<int>::iterator i = b.begin(); i != b.end(); ++i)
+  // {
+  //   std::cout << " " << *i;
+  // }
+  // std::cout << " end" << std::endl;
+
+  // lower_bound
+  std::vector<int> a = {};
+  auto iter = std::lower_bound(a.begin(), a.end(), 3);
+  if (iter == a.end())
   {
-    if (l_1d_map_[i] == false)
-    {
-      if (open_size == 0)
-      {
-        gap_start_l = i * grid_resolusion_ + l_map_start_;
-      }
-      open_size++;
-    }
-    else
-    {
-      if (open_size != 0)
-      {
-        gap_end_l = (i - 1) * grid_resolusion_ + l_map_start_;
-      }
-      if (open_size > narrow_trigger_size)
-      {
-        if (i >= ego_detect_start && i < ego_detect_end)
-        {
-          if (std::min(std::fabs(gap_start_l - ego_center_l_),
-                       std::fabs(gap_end_l - ego_center_l_)) <
-              std::fabs(closest_gap_l_ - ego_center_l_))
-          {
-            closest_gap_l_ =
-                (std::fabs(gap_start_l - ego_center_l_) < std::fabs(gap_end_l - ego_center_l_))
-                    ? gap_start_l
-                    : gap_end_l;
-          }
-        }
-      }
-      open_size = 0;
-    }
+    return a.back();
   }
-  std::cout << "closest_gap_l_: " << closest_gap_l_ << std::endl;
-
+  std::cout << *iter << std::endl;
   return 0;
 }
