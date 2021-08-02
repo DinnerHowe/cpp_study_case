@@ -65,6 +65,7 @@ target_link_libraries (test_eigen Eigen3::Eigen)
 add_executable(overload src/overload.cpp)
 
 add_executable(test_mem src/test_mem.cpp)
+target_link_libraries(test_mem pthread)
 
 add_executable(std_unique_ptr src/std_unique_ptr.cpp)
 
